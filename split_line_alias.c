@@ -16,8 +16,10 @@ char **tokens = malloc(bufsize * sizeof(char *));
 char *token_start = line;
 char *token_end;
 if (!tokens)
+{
 perror("allocation error");
 exit(EXIT_FAILURE);
+}
 while (1)
 {
 if (strcmp(line, "") == 0)
@@ -39,19 +41,21 @@ tokens[position] = trim_whitespace(strdup(token_start));
 position++;
 token_start = token_end + 1;
 }
-
 if (position >= bufsize)
 {
 bufsize += MAX_COMMANDS;
 tokens = realloc(tokens, bufsize *sizeof(char *));
 if (!tokens)
+{
 perror("allocation error");
 exit(EXIT_FAILURE);
+}
 }
 }
 tokens[position] = NULL;
 return (tokens);
 }
+
 alias_t alias_table[MAX_ALIAS_NUM];
 int alias_count = 0;
 
@@ -146,3 +150,4 @@ print_alias(args[1]);
 return (1);
 }
 }
+
