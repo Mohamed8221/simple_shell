@@ -23,6 +23,11 @@ do {
 printf("$ ");
 line = get_line();
 comment = strchr(line, '#');
+if (strcmp(line, "") == 0)
+{
+free(line);
+continue;
+}
 if (comment)
 *comment = '\0';
 /* Handle variable replacement */
