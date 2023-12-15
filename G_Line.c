@@ -45,20 +45,20 @@ rem_hash(buffer);
 return (buffer);
 }
 /**
- * rem_hash - remove everything after #
- * @buf: input;
- * Return:void
- */
+* rem_hash - remove everything after #
+* @buf: input;
+* Return:void
+*/
 void rem_hash(char *buf)
 {
-	int index;
+int index;
 
-		for (index = 0; buf[index] != '\0'; index++)
-		{
-			if (buf[index] == '#')
-			{
-			buf[index] = '\0';
-			break;
-			}
-	}
+for (index = 0; buf[index] != '\0'; index++)
+{
+if (buf[index] == '#')
+{
+buf[index] = '\0';
+break;
+}
+}
 }

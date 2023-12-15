@@ -25,13 +25,10 @@ if (is_alpha_betic(cmd[1][index++]) != 0)
 show_error(input, count, args);
 break;
 }
-else
-{
 status = convert_to_integer(cmd[1]);
 free(input);
 free(cmd);
 exit(status);
-}
 }
 }
 
@@ -46,27 +43,38 @@ int ch_dir(char **cmd, __attribute__((unused))int status)
 {
 int index = -1;
 char path[PATH_MAX];
+char *oldpwd = getenv("PWD");
 
 if (cmd[1] == NULL)
 index = chdir(getenv("HOME"));
 else if (compare_strs(cmd[1], "-") == 0)
 {
+if (getenv("OLDPWD") != NULL)
+{
+printf("%s\n", getenv("OLDPWD"));
 index = chdir(getenv("OLDPWD"));
+}
+else
+{
+printf("hsh: cd: OLDPWD not set\n");
+return (0);
+}
 }
 else
 index = chdir(cmd[1]);
 
-if (index == -1)
+if (index != -1)
+{
+getcwd(path, sizeof(path));
+setenv("OLDPWD", oldpwd, 1);
+setenv("PWD", path, 1);
+}
+else
 {
 perror("hsh");
 return (-1);
 }
-else if (index != -1)
-{
-getcwd(path, sizeof(path));
-setenv("OLDPWD", getenv("PWD"), 1);
-setenv("PWD", path, 1);
-}
+
 return (0);
 }
 
