@@ -26,6 +26,22 @@ char *command;
 int (*fun)(char **line, int error);
 } builtin_t;
 
+/**
+* struct alias - Struct for storing shell aliases
+* @name: Name of the alias
+* @value: Value of the alias
+* @next: Pointer to the next alias
+*
+* Description: This struct is used for storing aliases in the shell.
+*/
+typedef struct alias
+{
+char *name;
+char *value;
+struct alias *next;
+} alias_t;
+extern alias_t *alias_list;
+
 #define BUFFER_SIZE 1024
 #define DELIMITER " \t\r\n\a"
 #define PRINT(c) (write(STDOUT_FILENO, c, string_long(c)))
@@ -86,7 +102,7 @@ int dis_help(char **cmd, int status);
 int exe_echo(char **cmd, int status);
 void exit_command(char **cmd, char *input, char **args, int count);
 int echo_viewer(char **cmd, int status);
-
+int handle_alias(char **args, alias_t **alias_list);
 
 void pr_num(unsigned int num);
 void pt_int(int num);

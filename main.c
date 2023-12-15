@@ -12,7 +12,7 @@ int argc, char **argv)
 {
 char *input, **command;
 int counter = 0, status = 1, last_status = 0;
-
+alias_t *alias_list = NULL;
 if (argv[1] != NULL)
 r_file(argv[1], argv);
 signal(SIGINT, signal_h);
@@ -31,6 +31,10 @@ command = par_input(input);
 if (compare_strs(command[0], "exit") == 0)
 {
 exit_command(command, input, argv, counter);
+}
+if (compare_strs(command[0], "alias") == 0)
+{
+handle_alias(command, &alias_list);
 }
 else if (bltin_check(command) == 0)
 {
