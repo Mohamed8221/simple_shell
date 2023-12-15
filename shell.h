@@ -1,65 +1,96 @@
-#ifndef SHELL_H
-#define SHELL_H
+#ifndef MAIN_HEADER
+#define MAIN_HEADER
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
+#include <sys/types.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <linux/limits.h>
 
-#define MAX_COMMANDS 100
-#define MAX_ALIAS_NUM 100
-#define MAX_ALIAS_NAME 100
-#define MAX_ALIAS_VALUE 1000
+
+/**
+* struct builtin - contain builtin to handle and function
+* @command:pointer to char
+* @fun:fun to execute when builtin true
+*/
+
+typedef struct  builtin
+{
+char *command;
+int (*fun)(char **line, int error);
+} builtin_t;
+
+#define BUFFER_SIZE 1024
+#define DELIMITER " \t\r\n\a"
+#define PRINT(c) (write(STDOUT_FILENO, c, string_long(c)))
+
 
 extern char **environ;
 
-/**
-* struct s_node - linked list for line chunks
-* @data: line chunk
-* @next: next node
-*/
-typedef struct s_node
-{
-char *data;
-struct s_node *next;
-} t_node;
+char *str_tokenizer(char *str, const char *del);
+unsigned int del_check(char ch, const char *check);
+char *copy_string_n(char *dest, char *src, int len);
+int string_long(char *str);
+int print_ch(char ch);
+int convert_to_integer(char *str);
+void print_string(char *str);
+int compare_strs(char *str1, char *str2);
+int is_alpha_betic(int ch);
+void rev_str(char *str, int len);
+int integer_long(int num);
+char *integer_to_string(unsigned int num);
+char *concat_str(char *str1, char *str2);
+char *copy_str(char *dest, char *src);
+char *find_char(char *str, char ch);
+int compare_str_n(const char *str1, const char *str2, size_t len);
+char *dupli_str(char *str);
 
-/**
-* struct alias - alias structure
-* @name: alias name
-* @value: alias value
-*/
-typedef struct alias
-{
-char name[MAX_ALIAS_NAME];
-char value[MAX_ALIAS_VALUE];
-} alias_t;
 
-extern alias_t alias_table[MAX_ALIAS_NUM];
-extern int alias_count;
+void free_environment(char **env);
+void *fill_mem(void *mem, int val, unsigned int len);
+char *copy_mem(char *dest, char *src, unsigned int size);
+void *allocate_mem(unsigned int size);
+void *reallocate_mem(void *ptr, unsigned int old_size,
+unsigned int new_size);
+void free_mem(char **cmd, char *str);
 
-void print_aliases(void);
-void print_alias(char *arg);
-void set_alias(char *arg);
-int handle_alias(char **args);
-char *get_line(void);
-char *replace_str(char *str, char *old, char *new);
-char **parse_input(char *line);
-int execute_command(char **args);
-int create_env_var(char *var, char *value);
-int remove_env_var(char *var);
-int execute_external_command(char **args);
-int handle_unsetenv(char **args);
-char *_getenv(const char *name);
-int handle_setenv(char **args);
-int handle_exit(char **args);
-int shell_loop(void);
-char *trim_whitespace(char *str);
-int print_env(void);
-char *get_line_from_file(FILE *file);
-int handle_cd(char **args);
-int separator(char *line);
-char **split_line(char *line, char *delim);
 
-#endif /* SHELL_H */
+void dis_pr(void);
+void signal_h(int signal);
+char *take_input(void);
+int path_H(char **cmd);
+char *take_environment(char *name);
+char **par_input(char *input);
+int exe_blin(char **cmd, int status);
+void r_file(char *filename, char **args);
+char *b_command(char *cmd, char *dir);
+int bltin_check(char **cmd);
+void st_env(char **env);
+int exe_comm_and(char **cmd, char *input, int count, char **args);
+void process_input(char *line, int count, FILE *file, char **args);
+void exit_from_file(char **cmd, char *line, FILE *file);
+
+
+void rem_hash(char *buf);
+int rec_history(char *input);
+int dis_history(char **cmd, int status);
+int exe_env(char **cmd, int status);
+int ch_dir(char **cmd, int status);
+int dis_help(char **cmd, int status);
+int exe_echo(char **cmd, int status);
+void exit_command(char **cmd, char *input, char **args, int count);
+int echo_viewer(char **cmd, int status);
+
+
+void pr_num(unsigned int num);
+void pt_int(int num);
+void show_error(char *input, int count, char **argv);
+void print_custom_error(char **argv, int count, char **command);
+
+#endif
