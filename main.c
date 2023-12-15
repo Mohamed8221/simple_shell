@@ -63,6 +63,7 @@ builtin_t builtin[] = {
 {"help", NULL},
 {"echo", NULL},
 {"history", NULL},
+{"alias", NULL},
 {NULL, NULL}
 };
 int index = 0;
