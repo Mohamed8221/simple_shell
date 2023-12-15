@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
-* display_prompt - Display Shell Prompt
+* dis_pr - Display Shell Prompt
 */
 void dis_pr(void)
 {
@@ -9,7 +9,7 @@ PRINT("$ ");
 }
 
 /**
-* print_error - Display Error
+* show_error - Display Error
 * @input:Input
 * @count:Count Loop
 * @argv:Program

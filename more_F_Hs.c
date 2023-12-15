@@ -31,7 +31,7 @@ return (diff);
 }
 
 /**
-* is_alphabetic - Check if Alphabetic
+* is_alpha_betic - Check if Alphabetic
 *@ch: Character
 * Return: 1 If True 0 If Not
 */
@@ -94,7 +94,7 @@ str[(len - 1) - index] = temp;
 }
 
 /**
-* integer_length - Determine Length
+* integer_long - Determine Length
 * @num: Number
 * Return: Length
 */

@@ -39,6 +39,7 @@ return (0);
 /**
 * echo_viewer - execute Normal Echo
 * @cmd: Parsed Command
+* @status:Status Of Last Execute
 * Return: 0 Success -1 Fail
 */
 int echo_viewer(char **cmd, int status)

@@ -45,7 +45,7 @@ return (new_str);
 }
 
 /**
-* find_char - Locate Character In String
+* find_ch - Locate Character In String
 * @str:String Search In
 * @ch:Char To Search For
 * Return: Pointer To Char*

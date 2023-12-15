@@ -37,7 +37,7 @@ exit(status);
 
 
 /**
-* cd_dir - Change directories
+* ch_dir - Change directories
 * @cmd: Parsed command
 * @status: Status last command executed
 * Return: 0 Success 1 Failed (For Old Pwd Always 0 Case No Old PWD)

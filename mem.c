@@ -68,7 +68,7 @@ return (dest);
 }
 /**
 * fill_mem - Fill an array by constant byte
-* @arr:Void Pointer
+* @mem:Void Pointer
 * @val: Int
 * @len:Length Int
 *Return: Void Pointer

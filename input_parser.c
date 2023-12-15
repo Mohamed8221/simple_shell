@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
-* parse_input - Parsed Line
+* par_input - Parsed Line
 * @input:User Input
 * Return: Parsed
 */

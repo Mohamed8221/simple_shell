@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
-* is_delim - Checks there is another char* match
+* del_check - Checks there is another char* match
 * @ch: Character
 * @check: Checker
 * Return: 1 Success, 0 Failed
@@ -19,7 +19,7 @@ return (0);
 }
 
 /**
-* string_tokenizer - My own strtrok
+* str_tokenizer - My own strtrok
 * @str: String Character
 * @del: Delimiter
 * Return: Pointer To The Next Token Or NULL

@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
-* handle_builtin - Handle Builtin Command
+* exe_blin - Handle Builtin Command
 * @cmd: Parsed Command
 * @status:status of last Execute
 * Return: -1 Fail 0 Success (Return :Execute Builtin)
@@ -75,7 +75,7 @@ return (0);
 }
 
 /**
-* read_command - Read Command From File
+* r_file - Read Command From File
 * @filename:Filename
 * @args:Program Name
 * Return: -1 or  0
