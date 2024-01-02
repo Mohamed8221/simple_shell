@@ -87,16 +87,23 @@ return (0);
 int exe_env(__attribute__((unused)) char **cmd,
 __attribute__((unused)) int status)
 {
-size_t size;
-int index;
+extern char **environ;
+int i;
 
-for (size = 0; environ[size] != NULL; size++)
+/* If the command has more than one argument, return an error */
+if (cmd[1] != NULL)
 {
-index = string_long(environ[size]);
-write(1, environ[size], index);
-write(STDOUT_FILENO, "\n", 1);
+fprintf(stderr, "env: Too many arguments\n");
+return (1);
 }
-return (0);
+
+/* Print each environment variable */
+for (i = 0; environ[i] != NULL; i++)
+{
+printf("%s\n", environ[i]);
+}
+
+return (status);
 }
 
 /**

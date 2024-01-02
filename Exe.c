@@ -14,6 +14,7 @@ builtin_t bi[] = {
 {"env", exe_env},
 {"help", dis_help},
 {"echo", exe_echo},
+{"env", exe_env},
 {"history", dis_history},
 {NULL, NULL}
 };
