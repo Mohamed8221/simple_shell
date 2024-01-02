@@ -10,28 +10,23 @@
 */
 void  exit_command(char **cmd, char *input, char **args, int count)
 {
-int status, index = 0;
+int status = 0;
 
-if (cmd[1] == NULL)
+if (cmd[1] != NULL)
 {
-free(input);
-free(cmd);
-exit(EXIT_SUCCESS);
-}
-while (cmd[1][index])
-{
-if (is_alpha_betic(cmd[1][index++]) != 0)
+char *endptr;
+status = strtol(cmd[1], &endptr, 10);
+if (*endptr != '\0')
 {
 show_error(input, count, args);
-break;
+return;
 }
-status = convert_to_integer(cmd[1]);
+}
+
 free(input);
 free(cmd);
 exit(status);
 }
-}
-
 
 /**
 * ch_dir - Change directories
