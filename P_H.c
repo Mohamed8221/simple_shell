@@ -18,7 +18,6 @@ while (dir != NULL)
 full_path = b_command(*cmd, dir);
 if (stat(full_path, &buf) == 0)
 {
-free(*cmd);
 *cmd = full_path;
 free(path);
 return (0);
