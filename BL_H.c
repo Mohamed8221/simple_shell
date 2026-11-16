@@ -140,8 +140,13 @@ int exe_echo(char **cmd, int status)
 {
 char *path;
 unsigned int  process_id = getppid();
+int index;
 
-if (compare_strs(cmd[1], "$?") == 0)
+if (cmd[1] == NULL)
+{
+PRINT("\n");
+}
+else if (compare_strs(cmd[1], "$?") == 0)
 {
 pr_num(status);
 PRINT("\n");
@@ -150,18 +155,24 @@ else if (compare_strs(cmd[1], "$$") == 0)
 {
 pr_num(process_id);
 PRINT("\n");
-
 }
 else if (compare_strs(cmd[1], "$PATH") == 0)
 {
 path = getenv("PATH");
+if (path != NULL)
 PRINT(path);
 PRINT("\n");
-free(path);
-
 }
 else
-return (exe_echo(cmd, status));
+{
+for (index = 1; cmd[index] != NULL; index++)
+{
+if (index > 1)
+PRINT(" ");
+PRINT(cmd[index]);
+}
+PRINT("\n");
+}
 
-return (1);
+return (0);
 }
