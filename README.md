@@ -35,7 +35,7 @@ echo "/bin/ls" | ./hsh
 ## Features
 
 - Runs programs by absolute path with arguments (`/bin/ls -l /tmp`)
-- Looks commands up in `PATH` (`ls`, `pwd`)
+- Looks commands up in `PATH` (`ls -l`, `pwd`)
 - Builtins:
 
   | Builtin | Behavior |
@@ -46,15 +46,14 @@ echo "/bin/ls" | ./hsh
   | `history` | Print the command history, kept in `.simple_shell_history` |
   | `echo $?` | Exit status of the last command |
   | `echo $$` | Process ID |
+  | `echo $PATH` | Value of `PATH` |
+  | `echo text` | Print the arguments |
 
 - Error messages in the `sh` style: `./hsh: 1: nosuchcmd: ...`
 - Prompt shown only when input is a terminal
 
 ## Known issues
 
-- A command found through `PATH` loses its arguments (`ls -l` behaves like `ls` with a bad argument). Use the full path, e.g. `/bin/ls -l`, when passing arguments.
-- `echo` with plain text (`echo hello`) crashes; use `/bin/echo hello`.
-- `echo $PATH` prints the value and then aborts.
 - `help` and `alias` are declared but not finished.
 
 ## Source layout
